@@ -1,5 +1,16 @@
 	
 	
+	view, swiper, swiper-item {
+		box-sizing: border-box;
+	}
+	
+	.pageBg {
+		height: 80vh;
+		background: 
+		linear-gradient(to bottom, transparent , #ffffff 400rpx), // 400rpx 以下就是白色
+		linear-gradient(to right, #beecd8 20%, #f4e2d8);
+	}
+	
 	.flex {
 		display: flex;
 	}
@@ -15,3 +26,4 @@
 	.bbox {
 		box-sizing: border-box;
 	}
+	

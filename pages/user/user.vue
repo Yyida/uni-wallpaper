@@ -9,34 +9,38 @@
 		</view>
 		<view class="scetion">
 			<view class="scetion-list">
-				<view class="scetion-row">
-					<view class="row-lf">
-						<view class="row-icon">
-							<uni-icons type="download" size="20" color="#28b389"></uni-icons>
+				<navigator url="/pages/classlist/classlist">
+					<view  class="scetion-row">
+						<view class="row-lf">
+							<view class="row-icon">
+								<uni-icons type="download" size="20"></uni-icons>
+							</view>
+							<view class="row-text">我的下载</view>
 						</view>
-						<view class="row-text">我的下载</view>
-					</view>
-					<view class="row-rg">
-						<view class="row-text">3</view>
-						<uni-icons type="right" size="15" color="#aaaaaa"></uni-icons>
-					</view>
-				</view>
-				<view class="scetion-row">
-					<view class="row-lf">
-						<view class="row-icon">
-							<uni-icons type="star" size="20" color="#28b389"></uni-icons>
+						<view class="row-rg">
+							<view class="row-text">3</view>
+							<uni-icons type="right" size="15" color="#aaaaaa"></uni-icons>
 						</view>
-						<view class="row-text">我的评分</view>
 					</view>
-					<view class="row-rg">
-						<view class="row-text">3</view>
-						<uni-icons type="right" size="15" color="#aaaaaa"></uni-icons>
+				</navigator>
+				<navigator url="/pages/classlist/classlist">
+					<view  class="scetion-row">
+						<view class="row-lf">
+							<view class="row-icon">
+								<uni-icons type="star" size="20"></uni-icons>
+							</view>
+							<view class="row-text">我的评分</view>
+						</view>
+						<view class="row-rg">
+							<view class="row-text">3</view>
+							<uni-icons type="right" size="15" color="#aaaaaa"></uni-icons>
+						</view>
 					</view>
-				</view>
+				</navigator>
 				<view class="scetion-row">
 					<view class="row-lf">
 						<view class="row-icon">
-							<uni-icons type="chatboxes" size="20" color="#28b389"></uni-icons>
+							<uni-icons type="chatboxes" size="20"></uni-icons>
 						</view>
 						<view class="row-text">联系客服</view>
 						<!-- #ifdef MP -->
@@ -58,7 +62,7 @@
 				<view class="scetion-row">
 					<view class="row-lf">
 						<view class="row-icon">
-							<uni-icons type="notification" size="20" color="#28b389"></uni-icons>
+							<uni-icons type="notification" size="20"></uni-icons>
 						</view>
 						<view class="row-text">订阅更新</view>
 					</view>
@@ -70,7 +74,7 @@
 				<view class="scetion-row">
 					<view class="row-lf">
 						<view class="row-icon">
-							<uni-icons type="flag" size="20" color="#28b389"></uni-icons>
+							<uni-icons type="flag" size="20"></uni-icons>
 						</view>
 						<view class="row-text">常见问题</view>
 					</view>
@@ -154,6 +158,11 @@
 						align-items: center;
 						.row-icon {
 							margin-right: 5px;
+							:deep() {
+								.uni-icons {
+									color:$brand-theme-color !important;
+								}
+							}
 						}
 						.row-text {
 							color: #a1a1a1;

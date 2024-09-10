@@ -1,0 +1,1 @@
+<view class="classlist-layout"><view class="content-list"><view wx:for="{{a}}" wx:for-item="item" class="content-item"><image class="pic" src="{{b}}" mode="aspectFill"></image></view></view></view>

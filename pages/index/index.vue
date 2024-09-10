@@ -12,7 +12,7 @@
 		
 		<view class="notice-container bbox flex jcc aic">
 			<view class="lf-col flex jcc aic">
-				<uni-icons type="sound-filled" size="20" color="#28b389"></uni-icons>
+				<uni-icons type="sound-filled" size="20"></uni-icons>
 				<text class="notice-text">公告</text>
 			</view>
 			<view class="cn-col">
@@ -38,7 +38,7 @@
 				<template #custom>
 					<view class="common-title-rg">
 						<view class="date-icon">
-							<uni-icons type="calendar" size="20" color="#28b389"></uni-icons>
+							<uni-icons type="calendar" size="20" ></uni-icons>
 						</view>
 						<view class="date-text">
 							<uni-dateformat :date="Date.now()" format="dd号"></uni-dateformat>
@@ -100,9 +100,16 @@
 		font-size: 40rpx;
 	}
 	.common-title-rg {
-		color: #28b389;
+		color: $brand-theme-color;
 		display: flex;
 		align-items: center;
+		.date-icon {
+			:deep() {
+				.uni-icons {
+					color: $brand-theme-color !important;
+				}
+			}
+		}
 		.common-title-rg-text {
 			color: #888888;
 			font-size: 32rpx;
@@ -137,11 +144,16 @@
 			border-radius: 80rpx;
 			.lf-col{
 				width: 140rpx;
+				:deep() {
+					.uni-icons {
+						color:$brand-theme-color !important;
+					}
+				}
 				.notice-text {
 					font-size: 30rpx;
 					font-weight: 600;
 					margin-left: 5rpx;
-					color: #28b389;
+					color: $brand-theme-color;
 				}
 			}
 			.cn-col{

@@ -1,11 +1,11 @@
 <template>
 		<view class="container">
-			<navigator class="theme-item" url="" v-if="!isMore" >
+			<navigator class="theme-item" url="/pages/classlist/classlist" v-if="!isMore" >
 				<image class="pic" src="../../common/images/classify1.jpg" mode="aspectFill"></image>
 				<view class="mask">明星分类</view>
 				<view class="tag">20小时前</view>
 			</navigator>
-			<navigator class="theme-item theme-more" v-if="isMore" url="">
+			<navigator class="theme-item theme-more" v-if="isMore" url="/pages/classlist/classlist" open-type="reLaunch">
 				<image class="pic" src="../../common/images/more.jpg" mode="aspectFill"></image>
 				<view class="mask">
 					<uni-icons type="more" size="26" color="#ffffff"></uni-icons>

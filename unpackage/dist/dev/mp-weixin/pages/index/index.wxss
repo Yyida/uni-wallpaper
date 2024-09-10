@@ -31,6 +31,9 @@
   display: flex;
   align-items: center;
 }
+.common-title-rg .date-icon.data-v-1cf27b2a  .uni-icons {
+  color: #28b389 !important;
+}
 .common-title-rg .common-title-rg-text.data-v-1cf27b2a {
   color: #888888;
   font-size: 32rpx;
@@ -63,6 +66,9 @@
 }
 .home-layout-contaner .notice-container .lf-col.data-v-1cf27b2a {
   width: 140rpx;
+}
+.home-layout-contaner .notice-container .lf-col.data-v-1cf27b2a  .uni-icons {
+  color: #28b389 !important;
 }
 .home-layout-contaner .notice-container .lf-col .notice-text.data-v-1cf27b2a {
   font-size: 30rpx;

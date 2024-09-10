@@ -82,6 +82,9 @@
 .user-layout .scetion .scetion-list .scetion-row .row-lf .row-icon {
   margin-right: 5px;
 }
+.user-layout .scetion .scetion-list .scetion-row .row-lf .row-icon  .uni-icons {
+  color: #28b389 !important;
+}
 .user-layout .scetion .scetion-list .scetion-row .row-lf .row-text {
   color: #a1a1a1;
 }

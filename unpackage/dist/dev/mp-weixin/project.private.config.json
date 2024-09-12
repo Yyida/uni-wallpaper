@@ -20,6 +20,20 @@
           "query": "",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "首页",
+          "pathName": "pages/index/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/preview/preview",
+          "query": "currentId=661383858b0da4a4e4dad02e",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }

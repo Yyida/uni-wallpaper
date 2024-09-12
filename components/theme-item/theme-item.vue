@@ -1,9 +1,9 @@
 <template>
 		<view class="container">
-			<navigator class="theme-item" url="/pages/classlist/classlist" v-if="!isMore" >
-				<image class="pic" src="../../common/images/classify1.jpg" mode="aspectFill"></image>
-				<view class="mask">明星分类</view>
-				<view class="tag">20小时前</view>
+			<navigator class="theme-item" :url="`/pages/classlist/classlist?id=${item._id}&name=${item.name}`" v-if="!isMore" >
+				<image class="pic" :src="item.picurl" mode="aspectFill"></image>
+				<view class="mask">{{item.name}}</view>
+				<view class="tag">{{filterTimerDiff(item.updateTime)}}</view>
 			</navigator>
 			<navigator class="theme-item theme-more" v-if="isMore" url="/pages/classlist/classlist" open-type="reLaunch">
 				<image class="pic" src="../../common/images/more.jpg" mode="aspectFill"></image>
@@ -18,10 +18,21 @@
 </template>
 
 <script setup>
+	import {filterTimerDiff} from '@/utils/index.js'
 defineProps({
 		isMore: {
 			type: Boolean,
 			default: false
+		},
+		item: {
+			type: Object,
+			default() {
+				return {
+					name: "默认分类",
+					picurl: '../../common/images/classify1.jpg',
+					updateTime: Date.now() - 1000 * 60 * 60 * 1
+				}
+			}
 		}
 	})
 </script>

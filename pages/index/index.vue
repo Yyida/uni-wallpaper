@@ -1,10 +1,11 @@
 <template>
 	<view class="home-layout-contaner pageBg">
+		<custom-nav-tar title="推荐"></custom-nav-tar>
 		<view class="banner-container">
 			<swiper class="swiper-container bbox" autoplay :interval="3000" :duration="200" circular indicator-dots indicator-color="rgba(255,255,255,.5)" indicator-active-color="rgba(255,255,255)" >
-				<swiper-item v-for="item in 3">
+				<swiper-item v-for="item in bannerList" :key="item._id">
 					<view class="swiper-item bbox">
-						<image src="../../common/images/banner3.jpg" mode="aspectFill"></image>
+						<image :src="item.picurl" mode="aspectFill"></image>
 					</view>
 				</swiper-item>
 			</swiper>
@@ -17,8 +18,8 @@
 			</view>
 			<view class="cn-col">
 				<swiper class="notice-swiper" vertical autoplay :interval="1500" :duration="200" circular>
-					<swiper-item v-for="item in 3">
-						<view class="notice-swiper-item">文本内容文本内容文本内容文本内容文本内容文本内容文本内容文本内容文本内容</view>
+					<swiper-item v-for="item in newList" :key="item._id">
+						<view class="notice-swiper-item">{{item.title}}</view>
 					</swiper-item>
 				</swiper>
 			</view>
@@ -48,8 +49,8 @@
 			</common-title>
 			<view class="select-content">
 				<scroll-view class="select-scorll" scroll-x>
-					<view class="select-item" v-for="item in 8">
-						<image class="item-image" src="../../common/images/preview_small.webp" mode="aspectFill"></image>
+					<view class="select-item" v-for="item in randowList" :key="item._id" @click="toPreview(item._id)">
+						<image class="item-image" :src="item.smallPicurl" mode="aspectFill"></image>
 					</view>
 				</scroll-view>
 			</view>
@@ -72,27 +73,74 @@
 			</common-title>
 			
 			<view class="theme-content">
-				<theme-item v-for="item in 8"></theme-item>
+				<theme-item v-for="item in classify" :key="item._id" :item="item"></theme-item>
 				<theme-item :isMore="true"></theme-item>
 			</view>
 		</view>
 	</view>
 </template>
 
-<script>
-	export default {
-		data() {
-			return {
-				
-			}
-		},
-		onLoad() {
-
-		},
-		methods: {
-
-		}
+<script setup>
+import { ref } from 'vue';
+import {GetBannerList, GetRandomList, GetNews, GetClassify} from '@/api/index.js'
+	const bannerList = ref([])
+	const randowList = ref([])
+	const newList = ref([])
+	const classify = ref([])
+	const toPreview = (id) => {
+		uni.navigateTo({
+			url:`/pages/preview/preview?id=${id}`
+		})
 	}
+	const getBannerList = () =>{ 
+		uni.showLoading({
+			title: '数据加载中...',
+			mask: true
+		})
+		GetBannerList().then(result => {
+			console.log(result)
+			bannerList.value = result.data
+		}).finally(() => {
+			uni.hideLoading()
+		})
+	}
+	const getRandowList = () =>{
+		uni.showLoading({
+			title: '数据加载中...',
+			mask: true
+		})
+		GetRandomList().then(result => {
+			randowList.value = result.data
+		}).finally(() => {
+			uni.hideLoading()
+		})
+	}
+	const getNewsList = () => {
+		uni.showLoading({
+			title: '数据加载中...',
+			mask: true
+		})
+		GetNews({select:true}).then(result => {
+			newList.value = result.data
+		}).finally(() => {
+			uni.hideLoading()
+		})
+	}
+	const getClasses = () =>{ 
+		uni.showLoading({
+			title: '数据加载中...',
+			mask: true
+		})
+		GetClassify({select: true}).then(result => {
+			classify.value = result.data
+		}).finally(() => {
+			uni.hideLoading()
+		})
+	}
+	getBannerList()
+	getRandowList()
+	getNewsList()
+	getClasses()
 </script>
 
 <style lang="scss" scoped>

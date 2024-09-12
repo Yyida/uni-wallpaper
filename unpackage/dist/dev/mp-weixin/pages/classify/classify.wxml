@@ -1,1 +1,1 @@
-<view class="calssify-container pageBg"><view class="calssify-content"><theme-item wx:for="{{a}}" wx:for-item="item" u-i="{{item.a}}" bind:__l="__l"></theme-item></view></view>
+<view class="calssify-container pageBg"><custom-nav-tar wx:if="{{a}}" u-i="2e1a1a89-0" bind:__l="__l" u-p="{{a}}"></custom-nav-tar><view class="calssify-content"><theme-item wx:for="{{b}}" wx:for-item="item" wx:key="a" u-i="{{item.b}}" bind:__l="__l" u-p="{{item.c}}"></theme-item></view></view>

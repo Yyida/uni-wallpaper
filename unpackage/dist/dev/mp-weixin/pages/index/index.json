@@ -2,6 +2,7 @@
   "navigationBarTitleText": "推荐",
   "navigationStyle": "custom",
   "usingComponents": {
+    "custom-nav-tar": "../../components/custom-nav-tar/custom-nav-tar",
     "uni-icons": "../../uni_modules/uni-icons/components/uni-icons/uni-icons",
     "uni-dateformat": "../../uni_modules/uni-dateformat/components/uni-dateformat/uni-dateformat",
     "common-title": "../../components/common-title/common-title",

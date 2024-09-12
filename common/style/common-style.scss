@@ -26,4 +26,10 @@
 	.bbox {
 		box-sizing: border-box;
 	}
+	.lodingLayout {
+		padding: 30rpx 0;
+	}
+	.safe-area-inset-bottom { // 底部安全区高度
+		height: env(safe-area-inset-bottom)
+	}
 	

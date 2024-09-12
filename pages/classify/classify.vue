@@ -1,14 +1,32 @@
 <template>
 	<view class="calssify-container pageBg">
-		
+		<custom-nav-tar title="分类"></custom-nav-tar>
 		<view class="calssify-content">
-			<theme-item v-for="item in 8"></theme-item>
+			<theme-item v-for="item in classify" :key="item._id" :item="item"></theme-item>
 		</view>
 		
 	</view>
 </template>
 
 <script setup>
+	import { onLoad } from '@dcloudio/uni-app'
+	import {GetClassify} from '@/api/index.js'
+	import {ref} from 'vue'
+	const classify = ref([])
+	const getClasses = () =>{
+		uni.showLoading({
+			title: '数据加载中...',
+			mask: true
+		})
+		GetClassify({pageSize: 99}).then(result => {
+			classify.value = result.data
+		}).finally(() => {
+			uni.hideLoading()
+		})
+	}
+	onLoad(() => {
+		getClasses()
+	})
 </script>
 
 <style lang="scss">

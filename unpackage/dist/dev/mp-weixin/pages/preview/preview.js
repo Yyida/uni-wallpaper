@@ -51,7 +51,7 @@ const _sfc_main = {
         userScore: starValue.value
       }).then((result) => {
         if (result.errCode === 0) {
-          classList.value[currentIndex.value] = { ...currentInfo.value, userScore: starValue.value };
+          classList.value[currentIndex.value] = { ...currentInfo.value, userScore: starValue.value, score: starValue.value };
           console.log("classList", classList.value);
           currentInfo.value = Object.assign(currentInfo.value, {
             userScore: starValue.value
@@ -147,19 +147,22 @@ const _sfc_main = {
       });
     };
     common_vendor.onLoad((e) => {
+      console.log(e);
       currentId.value = e.currentId;
       const list = common_vendor.index.getStorageSync("storageClassList") || [];
+      console.log("list", list);
       classList.value = list.map((item) => {
         return {
           ...item,
-          userScore: 0,
           picUrl: item.smallPicurl.replace("_small.webp", ".jpg")
         };
       });
       currentIndex.value = classList.value.findIndex((item) => item._id === currentId.value);
+      console.log(currentIndex.value, +"aaa11");
       filterReadImgs();
       currentInfo.value = classList.value[currentIndex.value];
       console.log(readImgs);
+      console.log("classList", classList);
     });
     return (_ctx, _cache) => {
       return {

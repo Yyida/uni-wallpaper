@@ -25,8 +25,9 @@ const _sfc_main = {
     const newList = common_vendor.ref([]);
     const classify = common_vendor.ref([]);
     const toPreview = (id) => {
+      common_vendor.index.setStorageSync("storageClassList", randowList.value);
       common_vendor.index.navigateTo({
-        url: `/pages/preview/preview?id=${id}`
+        url: `/pages/preview/preview?currentId=${id}`
       });
     };
     const getBannerList = () => {

@@ -88,8 +88,9 @@ import {GetBannerList, GetRandomList, GetNews, GetClassify} from '@/api/index.js
 	const newList = ref([])
 	const classify = ref([])
 	const toPreview = (id) => {
+		uni.setStorageSync('storageClassList', randowList.value)
 		uni.navigateTo({
-			url:`/pages/preview/preview?id=${id}`
+			url:`/pages/preview/preview?currentId=${id}`
 		})
 	}
 	const getBannerList = () =>{ 

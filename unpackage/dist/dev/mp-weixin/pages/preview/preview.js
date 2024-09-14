@@ -17,14 +17,14 @@ if (!Math) {
 const _sfc_main = {
   __name: "preview",
   setup(__props) {
-    const popupRef = common_vendor.ref(null);
-    const popupStarRef = common_vendor.ref(null);
+    const popupRef = common_vendor.ref();
+    const popupStarRef = common_vendor.ref();
     let starValue = common_vendor.ref(0);
     const classList = common_vendor.ref([]);
-    const currentId = common_vendor.ref(null);
-    const currentIndex = common_vendor.ref(null);
+    const currentId = common_vendor.ref();
+    const currentIndex = common_vendor.ref();
     const readImgs = common_vendor.ref([]);
-    const currentInfo = common_vendor.ref(null);
+    const currentInfo = common_vendor.ref({});
     const clickInfo = () => {
       popupRef.value.open();
     };
@@ -90,60 +90,68 @@ const _sfc_main = {
         title: "下载中...",
         mask: true
       });
-      common_vendor.index.getImageInfo({
-        src: currentInfo.value.picUrl,
-        success: (result) => {
-          if (result.errMsg == "getImageInfo:ok") {
-            common_vendor.index.saveImageToPhotosAlbum({
-              filePath: result.path,
-              success: (respone) => {
-                common_vendor.index.showModal({
-                  title: "温馨提示",
-                  content: "保存成功",
-                  showCancel: false
-                });
-              },
-              fail: (err) => {
-                if (err.errMsg == "saveImageToPhotosAlbum:fail cancel") {
-                  return;
-                }
-                common_vendor.index.showModal({
-                  title: "温馨提示",
-                  content: "保存到相册需要授权",
-                  success: (res) => {
-                    if (res.confirm) {
-                      common_vendor.index.openSetting({
-                        success: (authConfig) => {
-                          if (authConfig.authSetting["scope.writePhotosAlbum"]) {
-                            common_vendor.index.showToast({
-                              title: "获取授权成功",
-                              icon: "none"
-                            });
-                          } else {
-                            common_vendor.index.showToast({
-                              title: "获取授权失败",
-                              icon: "none"
-                            });
-                          }
-                        }
-                      });
-                    }
+      api_index.SetDownloadLog({
+        classid: currentId.value,
+        wallId: currentInfo.value._id
+      }).then(() => {
+        common_vendor.index.getImageInfo({
+          src: currentInfo.value.picUrl,
+          success: (result) => {
+            if (result.errMsg == "getImageInfo:ok") {
+              common_vendor.index.saveImageToPhotosAlbum({
+                filePath: result.path,
+                success: (respone) => {
+                  common_vendor.index.showModal({
+                    title: "温馨提示",
+                    content: "保存成功",
+                    showCancel: false
+                  });
+                },
+                fail: (err) => {
+                  if (err.errMsg == "saveImageToPhotosAlbum:fail cancel") {
+                    return;
                   }
-                });
-              }
+                  common_vendor.index.showModal({
+                    title: "温馨提示",
+                    content: "保存到相册需要授权",
+                    success: (res) => {
+                      if (res.confirm) {
+                        common_vendor.index.openSetting({
+                          success: (authConfig) => {
+                            if (authConfig.authSetting["scope.writePhotosAlbum"]) {
+                              common_vendor.index.showToast({
+                                title: "获取授权成功",
+                                icon: "none"
+                              });
+                            } else {
+                              common_vendor.index.showToast({
+                                title: "获取授权失败",
+                                icon: "none"
+                              });
+                            }
+                          }
+                        });
+                      }
+                    }
+                  });
+                }
+              });
+            }
+          },
+          fail: (err) => {
+            common_vendor.index.showModal({
+              title: "温馨提示",
+              content: "获取图片信息失败",
+              showCancel: false
             });
+          },
+          complete: () => {
+            common_vendor.index.hideLoading();
           }
-        },
-        fail: (err) => {
-          common_vendor.index.showModal({
-            title: "温馨提示",
-            content: "获取图片信息失败",
-            showCancel: false
-          });
-        },
-        complete: () => {
-          common_vendor.index.hideLoading();
-        }
+        });
+      }).catch((err) => {
+        common_vendor.index.hideLoading();
+        throw err;
       });
     };
     common_vendor.onLoad((e) => {

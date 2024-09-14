@@ -104,15 +104,15 @@
 	import {ref} from 'vue'
 	import { onLoad } from '@dcloudio/uni-app'
 	import {getStatuBarHeight} from '@/utils/system.js'
-	import {SetStar} from '@/api/index.js'
-	const popupRef = ref(null)
-	const popupStarRef = ref(null)
+	import {SetStar, SetDownloadLog} from '@/api/index.js'
+	const popupRef = ref()
+	const popupStarRef = ref()
 	let starValue = ref(0)
 	const classList = ref([])
-	const currentId = ref(null)
-	const currentIndex = ref(null)
+	const currentId = ref()
+	const currentIndex = ref()
 	const readImgs = ref([])
-	const currentInfo = ref(null)
+	const currentInfo = ref({})
 	const clickInfo = () => {
 		popupRef.value.open()
 	}
@@ -190,61 +190,70 @@
 			title: '下载中...',
 			mask:true
 		})
-		uni.getImageInfo({
-			src: currentInfo.value.picUrl,
-			success:(result) => { 
-				if(result.errMsg == "getImageInfo:ok") {
-					uni.saveImageToPhotosAlbum({
-						filePath: result.path,
-						success:(respone) =>{ 
-							uni.showModal({
-								title: '温馨提示',
-								content: '保存成功',
-								showCancel:false
-							})
-						},
-						fail:(err) =>{
-							if(err.errMsg == 'saveImageToPhotosAlbum:fail cancel') {
-								return
-							}
-							uni.showModal({
-								title: '温馨提示',
-								content: '保存到相册需要授权',
-								success:(res) =>{
-									if (res.confirm) {
-										uni.openSetting({
-											success:(authConfig) => {
-												if (authConfig.authSetting['scope.writePhotosAlbum']) {
-													uni.showToast({
-														title: '获取授权成功',
-														icon: 'none'
-													})
-												} else {
-													uni.showToast({
-														title: '获取授权失败',
-														icon: 'none'
-													})
-												}
-											}
-										})
-									}
+		SetDownloadLog({
+			classid: currentId.value,
+			wallId: currentInfo.value._id
+		}).then(() => {
+			uni.getImageInfo({
+				src: currentInfo.value.picUrl,
+				success:(result) => { 
+					if(result.errMsg == "getImageInfo:ok") {
+						uni.saveImageToPhotosAlbum({
+							filePath: result.path,
+							success:(respone) =>{ 
+								uni.showModal({
+									title: '温馨提示',
+									content: '保存成功',
+									showCancel:false
+								})
+							},
+							fail:(err) =>{
+								if(err.errMsg == 'saveImageToPhotosAlbum:fail cancel') {
+									return
 								}
-							})
-							
-						}
+								uni.showModal({
+									title: '温馨提示',
+									content: '保存到相册需要授权',
+									success:(res) =>{
+										if (res.confirm) {
+											uni.openSetting({
+												success:(authConfig) => {
+													if (authConfig.authSetting['scope.writePhotosAlbum']) {
+														uni.showToast({
+															title: '获取授权成功',
+															icon: 'none'
+														})
+													} else {
+														uni.showToast({
+															title: '获取授权失败',
+															icon: 'none'
+														})
+													}
+												}
+											})
+										}
+									}
+								})
+								
+							}
+						})
+					}
+				},
+				fail:(err) =>{
+					uni.showModal({
+						title: '温馨提示',
+						content: '获取图片信息失败',
+						showCancel:false
 					})
+				},
+				complete:() => {
+					uni.hideLoading()
 				}
-			},
-			fail:(err) =>{
-				uni.showModal({
-					title: '温馨提示',
-					content: '获取图片信息失败',
-					showCancel:false
-				})
-			},
-			complete:() => {
-				uni.hideLoading()
-			}
+			})
+		}).catch((err) => {
+			uni.hideLoading()
+			throw err
+			return 
 		})
 		// #endif
 	}

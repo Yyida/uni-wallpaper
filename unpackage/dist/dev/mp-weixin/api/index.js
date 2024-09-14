@@ -18,9 +18,13 @@ const GetClassifyList = (params) => {
 const SetStar = (params) => {
   return utils_request.request({ url: "/setupScore", data: params });
 };
+const SetDownloadLog = () => {
+  return utils_request.request({ url: "/downloadWall" });
+};
 exports.GetBannerList = GetBannerList;
 exports.GetClassify = GetClassify;
 exports.GetClassifyList = GetClassifyList;
 exports.GetNews = GetNews;
 exports.GetRandomList = GetRandomList;
+exports.SetDownloadLog = SetDownloadLog;
 exports.SetStar = SetStar;

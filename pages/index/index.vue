@@ -82,6 +82,7 @@
 
 <script setup>
 import { ref } from 'vue';
+import { onLoad, onShareAppMessage, onShareTimeline } from '@dcloudio/uni-app'
 import {GetBannerList, GetRandomList, GetNews, GetClassify} from '@/api/index.js'
 	const bannerList = ref([])
 	const randowList = ref([])
@@ -138,10 +139,32 @@ import {GetBannerList, GetRandomList, GetNews, GetClassify} from '@/api/index.js
 			uni.hideLoading()
 		})
 	}
-	getBannerList()
-	getRandowList()
-	getNewsList()
-	getClasses()
+	
+	onLoad(() => {
+		getBannerList()
+		getRandowList()
+		getNewsList()
+		getClasses()
+	})
+	// 转发
+	onShareAppMessage(() => {
+		return {
+			title: "壁纸小程序",
+			path: "/pages/index/index",
+			imageUrl: "/static/images/xxmLogo.png"
+		}
+	})
+	
+	
+	// 分享朋友圈仅支持安卓
+	onShareTimeline(() => {
+		return {
+			title: "壁纸小程序",
+			imageUrl: "/static/images/xxmLogo.png"
+		}
+	})
+	
+	
 </script>
 
 <style lang="scss" scoped>

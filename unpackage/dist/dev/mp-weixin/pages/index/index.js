@@ -75,10 +75,25 @@ const _sfc_main = {
         common_vendor.index.hideLoading();
       });
     };
-    getBannerList();
-    getRandowList();
-    getNewsList();
-    getClasses();
+    common_vendor.onLoad(() => {
+      getBannerList();
+      getRandowList();
+      getNewsList();
+      getClasses();
+    });
+    common_vendor.onShareAppMessage(() => {
+      return {
+        title: "壁纸小程序",
+        path: "/pages/index/index",
+        imageUrl: "/static/images/xxmLogo.png"
+      };
+    });
+    common_vendor.onShareTimeline(() => {
+      return {
+        title: "壁纸小程序",
+        imageUrl: "/static/images/xxmLogo.png"
+      };
+    });
     return (_ctx, _cache) => {
       return {
         a: common_vendor.p({
@@ -137,4 +152,5 @@ const _sfc_main = {
   }
 };
 const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__scopeId", "data-v-1cf27b2a"]]);
+_sfc_main.__runtimeHooks = 6;
 wx.createPage(MiniProgramPage);

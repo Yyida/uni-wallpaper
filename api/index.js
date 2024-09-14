@@ -44,3 +44,10 @@ export const GetClassifyList = (params) => {
 export const SetStar = (params) =>{ 
 	return request({url: '/setupScore', data: params})
 }
+
+/**
+ * 添加下载记录
+ */
+export const SetDownloadLog  = () => {
+	return request({url: '/downloadWall'})
+}
